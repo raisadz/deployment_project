@@ -1,0 +1,5 @@
+outs:
+- md5: 5b1be86dcf9cdb0dc92544375bd750fe.dir
+  size: 3518605
+  nfiles: 1
+  path: clean_data

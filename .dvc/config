@@ -1,0 +1,6 @@
+[core]
+    remote = s3default
+['remote "s3store"']
+    url = s3://dvc-bucket-for-deployment
+['remote "s3default"']
+    url = s3://myawsbucketdeploy
