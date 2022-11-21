@@ -35,3 +35,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
     #    role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+    - name: DVC action
+      uses: iterative/setup-dvc@v1
+      
