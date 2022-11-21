@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        pip install flake8 pytest dvc
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -37,4 +37,7 @@ jobs:
     #    role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
     - name: DVC action
       uses: iterative/setup-dvc@v1
+    - name: pull data
+      run: |
+        dvc pull
       
