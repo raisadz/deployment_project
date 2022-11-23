@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 import pandas as pd
 from starter.starter.ml.data import process_data
 from starter.starter.ml.model import inference
+import json
 
 app = FastAPI()
 @app.get('/')
@@ -35,7 +36,10 @@ class Data(BaseModel):
 
 @app.post('/inference/')
 async def predict(data: Data):
-    test = pd.DataFrame([data.dict(by_alias=True)], index = [0])
+   # data = json.dumps(data)
+   # breakpoint()
+    test = pd.DataFrame(data.dict(by_alias=True), index = [0])
+  #  test = pd.DataFrame(data=data, index=[0])
 
     cat_features = [
     "workclass",
@@ -48,8 +52,9 @@ async def predict(data: Data):
     "native-country",
     ]
 
+   # breakpoint()
     X_test, y_test, _, _ = process_data(
                 test, categorical_features=cat_features, label="salary", training=False,
                 encoder=encoder, lb=lb)
-    preds = inference(model, X_test)
+    preds = inference(model, X_test).tolist()
     return preds

@@ -18,7 +18,7 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    model = LogisticRegression().fit(X_train, y_train)
+    model = LogisticRegression(max_iter=500).fit(X_train, y_train)
     return model
 
 
