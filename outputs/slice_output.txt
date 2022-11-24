@@ -1,0 +1,4 @@
+        count  precision    recall     fbeta
+sex                                         
+Female   2126   0.528302  0.240343  0.330383
+Male     4387   0.773109  0.275037  0.405733
