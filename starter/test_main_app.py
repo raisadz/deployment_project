@@ -58,9 +58,9 @@ def salary_high():
 
 
 def test_post(salary_low, salary_high):
-    r_low = requests.post("http://0.0.0.0:5000/inference/", data=json.dumps(salary_low))
-    r_high = requests.post(
-        "http://0.0.0.0:5000/inference/", data=json.dumps(salary_high)
+    r_low = client.post("/inference/", data=json.dumps(salary_low))
+    r_high = client.post(
+        "/inference/", data=json.dumps(salary_high)
     )
     assert r_low.status_code == 200
     assert r_high.status_code == 200
