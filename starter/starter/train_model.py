@@ -6,8 +6,8 @@ import pandas as pd
 import os
 
 # Add the necessary imports for the starter code.
-from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference
+from starter.starter.ml.data import process_data
+from starter.starter.ml.model import train_model, compute_model_metrics, inference
 # Add code to load in the data.
 data = pd.read_csv('starter/data/clean_data/census_clean.csv')
 
@@ -40,7 +40,6 @@ os.makedirs('model', exist_ok=True)
 joblib.dump(model, 'model/model.pkl')
 joblib.dump(encoder, 'model/encoder.pkl')
 joblib.dump(lb, 'model/lb.pkl')
-#breakpoint()
 test.iloc[:1, :].to_json('model/test_example.json', orient='records')
 
 

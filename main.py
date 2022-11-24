@@ -43,10 +43,7 @@ class Data(BaseModel):
 
 @app.post('/inference/')
 async def predict(data: Data):
-   # data = json.dumps(data)
-   # breakpoint()
     test = pd.DataFrame(data.dict(by_alias=True), index = [0])
-  #  test = pd.DataFrame(data=data, index=[0])
 
     cat_features = [
     "workclass",
@@ -59,7 +56,6 @@ async def predict(data: Data):
     "native-country",
     ]
 
-   # breakpoint()
     X_test, y_test, _, _ = process_data(
                 test, categorical_features=cat_features, label="salary", training=False,
                 encoder=encoder, lb=lb)
