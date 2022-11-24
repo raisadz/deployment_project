@@ -1,7 +1,6 @@
 import json
 
 import pytest
-import requests
 from fastapi.testclient import TestClient
 
 from starter.main import app
@@ -59,9 +58,7 @@ def salary_high():
 
 def test_post(salary_low, salary_high):
     r_low = client.post("/inference/", data=json.dumps(salary_low))
-    r_high = client.post(
-        "/inference/", data=json.dumps(salary_high)
-    )
+    r_high = client.post("/inference/", data=json.dumps(salary_high))
     assert r_low.status_code == 200
     assert r_high.status_code == 200
     assert r_low.json() == ["<=50K"]
