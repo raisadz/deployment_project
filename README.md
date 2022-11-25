@@ -3,7 +3,7 @@
 Project **Deploying a Machine Learning Model on Heroku with FastAPI** of Machine Learning DevOps Engineer Nanodegree Udacity.
 
 ## Project Description
-The goal of the project is to deploy an ML classification model on Heroku using FastAPI. DVC on AWS S3 is used for data versioning. API tests and unit tests to monitor the model performance on various slices of the data were implemented nad incorporated into a CI/CD framework using GitHub Actions.
+The goal of the project is to deploy an ML classification model on Heroku using FastAPI. DVC on AWS S3 is used for data versioning. API tests and unit tests to monitor the model performance on various slices of the data were implemented and incorporated into a CI/CD framework using GitHub Actions.
 
 ## Files and data description
 The root directory contains:
@@ -12,7 +12,7 @@ The root directory contains:
 
 `starter/starter` contains scripts for data cleaning and model training;
 
-`starter/main.py` main script for implementing model deployment with FastAPI;
+`starter/main.py` main script for implementing a model deployment with FastAPI;
 
 `model` contains model training output;
 
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 ### Tracking data with DVC
 The dataset has column names with white spaces. To remove them, run the following command. It will output the new data to `starter/data/clean_data/clean_data.csv`.
 ```bash
-python starter/starter/clean_data.py
+python -m starter.starter.clean_data
 ```
 We want to keep track of `clean_data.csv` using DVC (data version control) and AWS S3 cloud storage. To do this, first create S3 bucket and IAM user which will have access to this bucket, see [instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console). Give the user a name and select Programmatic access.
 In the permissions selector, search for S3 and give it AmazonS3FullAccess or create a new policy with access to the created S3 bucket. Add the Access key ID and Secret Access key by running:
@@ -58,12 +58,12 @@ aws configure
 Run the following commands to start tracking clean_data with dvc on aws s3: 
 ```bash
 dvc init
-dvc remote add --default s3store s3://create-s3-bucket
+dvc remote add --default s3store s3://created-s3-bucket
 cd starter/data
 dvc add clean_data
 dvc push
 ```
-Note, that you should should the data in the folder. Otherwise, you might have issues with pulling it. In case, you didn't initialised git, you need to run `git init` after initialising dvc. To pull the data run:
+Note, that you should add the data in the folder. Otherwise, you might have issues with pulling it. In case, you didn't initialize git, you need to run `git init` after initializing dvc. To pull the data run:
 ```bash
 dvc pull
 ```
@@ -95,5 +95,5 @@ heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy
 ```
 Note, the implemented Heroku app will not be maintained here after the submission, as they are about to remove a free deployment access.
 
-### Continious Integration / Continious Delivery (CI/CD) using GitHub Actions
-This project implemented CI (located in `.github/workflows/flake8_pytest.yml`) that runs flake8 and pytest checks (three unit tests and three API tests were implemented). The CI process also pulls data from dvc. Note, that AWS credentials were added as secrets to be able to do this. CD was enabled for the Heroku implementation. 
+### Continious Integration and Continious Delivery (CI/CD) using GitHub Actions
+This project implemented CI (located in `.github/workflows/flake8_pytest.yml`) that runs flake8 and pytest checks. The CI process also pulls data from dvc. Note, that AWS credentials were added as secrets to be able to do this. CD was enabled for the Heroku implementation. 
