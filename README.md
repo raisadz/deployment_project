@@ -8,7 +8,7 @@ The goal of the project is to deploy an ML classification model on Heroku using 
 ## Files and data description
 The root directory contains:
 
-`starter/starter` contains the census data for the project, downloaded from the [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/census+income);
+`starter/data` contains the census data for the project, downloaded from the [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/census+income);
 
 `starter/starter` contains scripts for data cleaning and model training;
 
