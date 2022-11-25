@@ -57,17 +57,20 @@ def process_data(
     X_continuous = X.drop(*[categorical_features], axis=1)
 
     if training is True:
-        encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
+        if categorical_features:
+            encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
+            X_categorical = encoder.fit_transform(X_categorical)
         lb = LabelBinarizer()
-        X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
     else:
-        X_categorical = encoder.transform(X_categorical)
+        if categorical_features:
+            X_categorical = encoder.transform(X_categorical)
         try:
             y = lb.transform(y.values).ravel()
         # Catch the case where y is None because we're doing inference.
         except AttributeError:
             pass
+            
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb

@@ -66,7 +66,28 @@ def test_preprocess_data(data, cat_features):
     assert type(encoder) == sklearn.preprocessing._encoders.OneHotEncoder
     assert type(lb) == sklearn.preprocessing._label.LabelBinarizer
 
+def test_preprocess_data_None(data):
+    X_train, y_train, encoder, lb = process_data(
+        data,
+        categorical_features=None,
+        label='salary',
+        training=True
+    )
 
+    X_test, y_test, _, _ = process_data(
+        data,
+        categorical_features=None,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb,
+    )
+
+    assert type(X_train) == np.ndarray
+    assert type(y_train) == np.ndarray
+    assert type(X_test) == np.ndarray
+    assert type(y_test) == np.ndarray
+    
 def test_training_inference():
     X_encoded = np.ones([2, 107])
     target = np.array([0, 1])

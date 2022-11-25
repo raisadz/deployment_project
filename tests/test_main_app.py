@@ -56,10 +56,12 @@ def salary_high():
     }
 
 
-def test_post(salary_low, salary_high):
-    r_low = client.post("/inference/", data=json.dumps(salary_low))
-    r_high = client.post("/inference/", data=json.dumps(salary_high))
-    assert r_low.status_code == 200
-    assert r_high.status_code == 200
-    assert r_low.json() == ["<=50K"]
-    assert r_high.json() == [">50K"]
+def test_post_low(salary_low):
+    r = client.post("/inference/", data=json.dumps(salary_low))
+    assert r.status_code == 200
+    assert r.json() == ["<=50K"]
+
+def test_post_high(salary_high):
+    r = client.post("/inference/", data=json.dumps(salary_high))
+    assert r.status_code == 200
+    assert r.json() == [">50K"]

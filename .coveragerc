@@ -1,0 +1,2 @@
+[run]
+omit = starter/main.py,starter/sanitycheck.py,starter/setup.py

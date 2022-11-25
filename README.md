@@ -97,3 +97,9 @@ Note, the implemented Heroku app will not be maintained here after the submissio
 
 ### Continious Integration and Continious Delivery (CI/CD) using GitHub Actions
 This project implemented CI (located in `.github/workflows/flake8_pytest.yml`) that runs flake8 and pytest checks. The CI process also pulls data from dvc. Note, that AWS credentials were added as secrets to be able to do this. CD was enabled for the Heroku implementation. 
+
+### Test coverage
+To see test coverage:
+```bash
+pytest tests --cov=starter --cov-report=term-missing
+```
