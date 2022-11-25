@@ -59,8 +59,7 @@ print(f"Precision: {precision}, recall: {recall}, fbeta: {fbeta}")
 
 print(slice_performance(test, "sex", y_test, preds))
 
-os.makedirs("outputs", exist_ok=True)
-slice_path = "outputs/slice_output.txt"
+slice_path = "model/slice_output.txt"
 if os.path.exists(slice_path):
     os.remove(slice_path)
 tfile = open(slice_path, "w")
