@@ -22,9 +22,12 @@ async def say_hello():
     return {"greeting": "Welcome!"}
 
 
-model = joblib.load("model/model.pkl")
-encoder = joblib.load("model/encoder.pkl")
-lb = joblib.load("model/lb.pkl")
+@app.on_event("startup")
+async def startup_event(): 
+    global model, encoder, lb
+    model = joblib.load(open("model/model.pkl", "rb"))
+    encoder = joblib.load(open("model/encoder.pkl", "rb"))
+    lb = joblib.load(open("model/lb.pkl", "rb"))
 
 
 class Data(BaseModel):
@@ -60,7 +63,7 @@ async def predict(data: Data):
         "native-country",
     ]
 
-    X_test, y_test, _, _ = process_data(
+    X_test, _, _, _ = process_data(
         test,
         categorical_features=cat_features,
         label="salary",
